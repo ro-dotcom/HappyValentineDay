@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unlock My Heart ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ❤️ PHASE 1 ENTRY PAGE -->
+<section id="entry" class="page active">
+  <div class="card">
+    <img src="img11.jpeg">
+
+    <h2>Entry Denied 😎</h2>
+    <button id="unlock">Unlock My Heart</button>
+
+    <!-- Password Box -->
+    <div id="passwordBox" class="hidden">
+      <input id="password" type="text" placeholder="Inside joke password">
+      <button id="enter">Enter</button>
+    </div>
+
+    <!-- Error Box -->
+    <div id="error-container" class="hidden">
+      <img id="error-image" src="pic (5).jpg">
+      <p>Wrong code! 😭</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ❤️ PHASE 2 BOSS PAGE -->
+<section id="boss" class="page">
+  <div class="card">
+    <img id="bossImg" src="pic (4).jpg">
+    <h2>Will you be my Valentine? ❤️</h2>
+
+    <div class="row">
+      <button id="yes">YES 💖</button>
+      <button id="no">NO 😭</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ❤️ PHASE 3 DASHBOARD -->
+<section id="dashboard" class="page">
+
+  <!-- DO NOT PRESS -->
+  <button id="dontPress">DO NOT PRESS 😈</button>
+
+  <!-- Tabs -->
+  <nav class="tabs">
+    <button class="tab active" data-tab="receipt">Receipt</button>
+    <button class="tab" data-tab="mood">Mood</button>
+    <button class="tab" data-tab="slot">Slots</button>
+    
+
+    <!-- ✅ FIX: Gallery Tab Added -->
+    <button class="tab" data-tab="gallery">Gallery</button>
+    <button class="tab" data-tab="call">Call 💌</button> 
+    <button class="tab" data-tab="finale">Finale</button>
+
+  </nav>
+
+  <div class="content">
+
+        <!-- Mood -->
+    <div id="mood" class="panel">
+      <h3>Mood Radio 🎶</h3>
+      <button onclick="setVibe('romantic')">🌹 Romantic</button>
+      <button onclick="setVibe('chaos')">⚡ Chaos</button>
+      <audio id="music" controls loop></audio>
+    </div>
+
+    <!-- Receipt -->
+  <div id="receipt" class="panel active">
+  <h3>LOVE RECEIPT 🧾💜</h3>
+
+  <audio id="printSound" src="assets/print.mp3"></audio>
+
+  <!-- Customer Info -->
+  <div id="receiptHeader"></div>
+
+  <!-- Receipt Lines -->
+  <div id="receiptLines"></div>
+</div>
+
+
+
+    <!-- ✅ Gallery Panel -->
+    <div id="gallery" class="panel">
+      <h3>Gallery of Grins 📸</h3>
+
+      <div class="grid">
+        <img src="pic (1).jpg" class="photo"
+          data-caption="This moment made me fall harder 💜"
+          data-voice="assets/voice1.mp3">
+
+        <img src="pic (2).jpg" class="photo"
+          data-caption="Your smile here is my favorite thing ✨"
+          data-voice="assets/voice2.mp3">
+
+        <img src="pic (3).jpg" class="photo"
+          data-caption="I want forever moments like this 💖"
+          data-voice="assets/voice3.mp3">
+      </div>
+    </div>
+    
+<!-- 💌 LOVE CALL PANEL -->
+<div id="call" class="panel">
+
+  <h3>Love Portal 💘</h3>
+
+  <p>
+    Distance doesn’t matter...  
+    one click and I’ll be right there 😭💜
+  </p>
+
+  <!-- Countdown Display -->
+  <h2 id="callCountdown">Call unlocks in: 5 ❤️</h2>
+
+  <!-- Button -->
+  <button id="loveCallBtn" disabled>
+    🔒 Connecting...
+  </button>
+
+  <!-- Loading Text -->
+  <p id="callStatus"></p>
+
+</div>
+
+  
+
+    <!-- Slot -->
+<!-- Slot Panel ✅ FIXED -->
+<div id="slot" class="panel">
+  <h3>Compliments 🎰</h3>
+
+  <div id="slotBox">
+
+    <div class="reels">
+      <span id="reel1">💜</span>
+      <span id="reel2">💜</span>
+      <span id="reel3">💜</span>
+    </div>
+
+    <p id="slotResult">Pull the lever 🎰</p>
+
+  </div>
+
+  <!-- Lever -->
+  <div id="lever" onclick="spin()">
+    <div id="stick"></div>
+    <div id="ball"></div>
+  </div>
+  
+
+</div>
+
+
+
+
+    <!-- Finale -->
+    <div id="finale" class="panel">
+      <h3>Final Surprise 💌</h3>
+      <p id="typewriter"></p>
+      <div id="timer"></div>
+    </div>
+ 
+
+
+    <!-- 💖 Love Call Panel -->
+<div id="call" class="panel">
+
+  <h3>Emergency Love Call 💘</h3>
+
+  <p>
+    If you miss me too much…  
+    click this button and I’ll appear instantly 😭💜
+  </p>
+
+  <button id="loveCallBtn">
+    🚨 Summon Thomas on Google Meet
+  </button>
+
+</div>
+
+
+  </div>
+
+
+ 
+
+</section>
+
+
+<!-- ✅ FULLSCREEN VIEWER (keep outside dashboard) -->
+<div id="viewer" class="hidden">
+  <img id="viewerImg">
+  <p id="viewerCaption"></p>
+
+  <audio id="viewerVoice" controls></audio>
+
+  <button onclick="closeViewer()">Close ✖</button>
+</div>
+
+
+<!-- Popup -->
+<div id="popup" class="hidden">
+  <h1>I TOLD YOU NOT TO 😭</h1>
+  <img src="pic (6).jpg">
+  <button onclick="closePopup()">CLOSE</button>
+</div>
+
+<!-- 💜 MISS ME POPUP -->
+<div id="missPopup" class="hidden">
+  <div class="missBox">
+    <h2>Miss Me? 🥺💜</h2>
+    <p>Be honest... did you miss Thomas a little?</p>
+
+    <button onclick="openMeet()">YES 😭</button>
+
+    <!-- 😈 Running No Button -->
+    <button id="runNoBtn">NO 🙄</button>
+  </div>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
