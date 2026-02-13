@@ -1,0 +1,676 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #7b2ff7, #d66efd, #ff4fd8);
+
+  /* ✅ FIX: Allow scrolling */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Pages */
+.page {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.page.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+
+.hidden {
+  display: none !important;
+}
+
+/* Card */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 5;
+}
+
+img {
+  width: 100%;
+  border-radius: 15px;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  margin: 8px;
+  border: none;
+  border-radius: 25px;
+  background: crimson;
+  color: white;
+  cursor: pointer;
+}
+  
+#dashboard {
+  margin: auto;
+  padding: 20px;
+}
+
+#dashboard.active {
+  animation: popIn 0.8s ease;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+#dashboard.active {
+  justify-content: flex-start;
+  padding-top: 30px;
+}
+
+#dashboard {
+  width: 100%;
+  max-width: 550px;
+  margin: auto;
+}
+
+#dashboard {
+  animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+.tabs,
+.content {
+  width: 100%;
+  border-radius: 15px;
+}
+
+
+.tabs {
+  background: rgba(255, 255, 255, 0.12);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.25);
+
+  display: flex;
+  justify-content: space-around;
+  padding: 12px;
+
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  width: auto;
+}
+
+
+.tab {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+
+  padding: 8px 14px;
+  border-radius: 15px;
+
+  border: 1px solid rgba(255,255,255,0.3);
+
+  transition: 0.3s;
+}
+
+.tab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 12px rgba(255, 0, 150, 0.6);
+}
+
+.tab.active {
+  background: rgba(255, 255, 255, 0.85);
+  color: purple;
+  font-weight: bold;
+}
+
+.panel {
+  animation: fadePanel 0.5s ease;
+}
+
+@keyframes fadePanel {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.content {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 25px;
+  min-height: 250px;
+
+  /* Glass Effect */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  margin-top: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+
+  box-shadow: 0 0 25px rgba(255, 0, 150, 0.4);
+  width: auto;
+}
+
+
+.panel {
+  display: none;
+  
+}
+
+.panel.active {
+  display: block;
+}
+
+/* Error */
+#error-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+  animation: slideInLeft 0.5s ease, shake 0.4s ease;
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-60px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
+}
+
+#error-image {
+  width: 90px;
+  border-radius: 12px;
+  border: 2px solid crimson;
+}
+
+/* Popup */
+#popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+  z-index: 9999;
+}
+
+#popup img {
+  width: 250px;
+  border-radius: 20px;
+}
+
+/* DO NOT PRESS */
+#dontPress {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background: black;
+  font-size: 0.8rem;
+  z-index: 999;
+}
+
+/* FLOATING HEARTS */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.8;
+
+  /* ✅ FIX: Hearts will NEVER block clicks */
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0) scale(1); opacity: 1; }
+  to   { transform: translateY(-110vh) scale(1.8); opacity: 0; }
+}
+
+/* Gallery Grid */
+.grid {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+ 
+}
+
+.photo {
+
+  width: 220px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.photo:hover {
+  transform: scale(1.2);
+}
+
+/* ✅ FIXED Viewer Overlay */
+#viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+  z-index: 10000;
+}
+
+#viewerImg {
+  width: 300px;
+  border-radius: 20px;
+}
+
+#viewerVoice {
+  margin-top: 15px;
+}
+
+
+/* 🎰 SLOT MACHINE BOX */
+#slotBox {
+  background: rgba(255,255,255,0.25);
+  padding: 20px;
+  border-radius: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  margin: 15px auto;
+  text-align: center;
+  font-size: 1.2rem;
+  min-height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Rolling animation */
+.spinning {
+  animation: roll 0.4s infinite;
+  color: yellow;
+  font-weight: bold;
+}
+
+@keyframes roll {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* Spin button glow */
+#spinBtn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(255,0,150,0.6);
+}
+
+
+/* 🎰 SLOT LEVER */
+#lever {
+  width: 60px;
+  height: 140px;
+  margin: 20px auto;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Lever wiggle on hover */
+#lever:hover {
+  animation: wiggle 0.4s infinite;
+}
+
+@keyframes wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+  75% { transform: rotate(-4deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+/* Stick */
+#stick {
+  width: 12px;
+  height: 90px;
+  background: white;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Ball */
+#ball {
+  width: 35px;
+  height: 35px;
+  background: crimson;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(255,0,150,0.6);
+}
+
+/* Pull animation class */
+.pull #ball {
+  top: 60px;
+}
+
+
+/* 🎰 SLOT REELS 
+.reels {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font-size: 2rem;
+  margin-bottom: 15px;
+} */
+
+
+.reels {
+  gap: 10px;
+  flex-wrap: wrap; /* ✅ Works on mobile too */
+}
+
+
+.reels span {
+  width: 70px;
+  height: 70px;
+
+  font-size: 2.2rem; /* Big emoji */
+  font-weight: bold;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+  background: rgba(255,255,255,0.18);
+
+  border: 2px solid rgba(255,255,255,0.3);
+
+  box-shadow: 0 0 15px rgba(200,0,255,0.6);
+}
+
+
+
+/* Reel spinning animation */
+.reelSpin {
+  animation: reelRoll 0.2s infinite;
+}
+
+@keyframes reelRoll {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+
+/* Compliment Glow */
+#slotResult {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 18px;
+  text-align: center;
+  color: white;
+  text-shadow: 0 0 12px rgba(200,0,255,0.8);
+}
+
+
+/* When compliment lands */
+.glowPop {
+  animation: popGlow 0.6s ease;
+}
+
+@keyframes popGlow {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+/* 🎉 JACKPOT EFFECT */
+.jackpot {
+  color: gold !important;
+  font-size: 1.3rem;
+  text-shadow: 0 0 20px gold, 0 0 40px orange;
+}
+
+
+/* 🧾 RECEIPT STYLE */
+#receipt {
+  background: white;
+  color: black;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.95rem;
+
+  padding: 20px;
+  border-radius: 15px;
+
+  width: 90%;
+  margin: auto;
+
+  max-height: 250px;
+  overflow-y: auto;
+
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+
+  position: relative;
+}
+
+/* Dotted edges like receipt */
+#receipt::before,
+#receipt::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: repeating-linear-gradient(
+    to right,
+    transparent,
+    transparent 8px,
+    black 8px,
+    black 10px
+  );
+}
+
+#receipt::before {
+  top: 0;
+}
+
+#receipt::after {
+  bottom: 0;
+}
+#receiptLines {
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+#receiptLines p {
+  margin: 6px 0;
+  animation: fadeIn 0.4s ease;
+}
+
+#receiptLines h4 {
+  margin-top: 15px;
+  text-align: center;
+  color: crimson;
+  font-size: 1.2rem;
+  text-shadow: 0 0 10px pink;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+#receiptHeader p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+
+#loveCallBtn {
+  margin-top: 20px;
+  padding: 15px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff4da6, #b300ff);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 20px rgba(255, 0, 150, 0.5);
+  transition: 0.3s ease;
+}
+
+#loveCallBtn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(255, 0, 200, 0.8);
+}
+
+
+#loveCallBtn {
+  margin-top: 20px;
+  padding: 15px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff4da6, #8a2be2);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 25px rgba(255, 0, 200, 0.5);
+  transition: 0.3s ease;
+  opacity: 0.6;
+}
+
+#loveCallBtn:enabled {
+  opacity: 1;
+}
+
+#loveCallBtn:hover:enabled {
+  transform: scale(1.1);
+  box-shadow: 0 0 40px rgba(255, 0, 255, 0.8);
+}
+
+#callCountdown {
+  margin-top: 15px;
+  font-size: 22px;
+  color: white;
+}
+
+#callStatus {
+  margin-top: 15px;
+  font-size: 16px;
+  font-style: italic;
+  color: #fff;
+}
+
+
+#missPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.missBox {
+  background: linear-gradient(135deg, #ff4da6, #8a2be2);
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  width: 320px;
+  color: white;
+  box-shadow: 0 0 40px rgba(255, 0, 255, 0.6);
+  animation: popIn 0.4s ease;
+}
+
+.missBox button {
+  margin: 10px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  background: white;
+  color: purple;
+  transition: 0.2s;
+}
+
+.missBox button:hover {
+  transform: scale(1.08);
+}
+
+@keyframes popIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+#runNoBtn {
+  position: absolute;
+}
+.missBox {
+  position: relative; /* IMPORTANT */
+}
