@@ -165,9 +165,9 @@ const receiptData = [
 "💌 THANK YOU FOR SHOPPING IN ADRIJA'S HEART",
 "Return Policy: No returns. No exchanges. You’re stuck with me.😭💖",
 "Next Visit: Every Day ♾️",
-"Special Note: Thomas, you are his favorite miracle ✨",
-"--------------📌 SPECIAL NOTE-------------------",
-"Includes Complimentary ⭐️“Crunchy Fried Thomasssss",
+"Special Note: Thomas, you are her favorite miracle ✨",
+"Complimentary Add Ons:",
+"Includes Complimentary", "⭐️“Crunchy Fried Thomasssss",
 "⭐️Unlimited  TULKI NEEDS SUSHIIIIIII” Subscription",
 
 "Bonus Add ons - (free of charge) ",
@@ -175,6 +175,7 @@ const receiptData = [
 "✨ Laughing at your jokes (even the bad ones)",
 "✨ Being proud of you loudly and unapologetically",
 "✨Being Adrija Thomas Retail Mukherjee in every lifetime",
+  <br>
 "Signed,",
 "Your Risquéss❤️"
 
@@ -606,3 +607,4 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 });
+
