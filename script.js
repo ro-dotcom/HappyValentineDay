@@ -167,15 +167,15 @@ const receiptData = [
 "Next Visit: Every Day ♾️",
 "Special Note: Thomas, you are her favorite miracle ✨",
 "Complimentary Add Ons:",
-"Includes Complimentary", "⭐️“Crunchy Fried Thomasssss",
-"⭐️Unlimited  TULKI NEEDS SUSHIIIIIII” Subscription",
+"Includes Complimentary ⭐️ Crunchy Fried Thomasssss",
+"⭐️Unlimited  TULKI NEEDS SUSHIIIIIII Subscription",
 
 "Bonus Add ons - (free of charge) ",
 "✨ Random “I miss you” texts",
 "✨ Laughing at your jokes (even the bad ones)",
 "✨ Being proud of you loudly and unapologetically",
 "✨Being Adrija Thomas Retail Mukherjee in every lifetime",
-  <br>
+  " ",
 "Signed,",
 "Your Risquéss❤️"
 
@@ -607,4 +607,5 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 });
+
 
